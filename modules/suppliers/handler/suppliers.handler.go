@@ -39,7 +39,7 @@ func (h *Handler) SaveSupplier(c *fiber.Ctx) error {
 	}
 
 	if result.SupplierID == uuid.Nil {
-		return response.Error(c, 500, err)
+		return response.Warning(c, 400, "supplier code already exist")
 	}
 
 	return response.Created(c, result, "save supplier success")

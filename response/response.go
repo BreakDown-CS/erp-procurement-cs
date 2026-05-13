@@ -44,6 +44,13 @@ func Error(c *fiber.Ctx, status int, err error) error {
 	})
 }
 
+func Warning(c *fiber.Ctx, status int, msg string) error {
+	return c.Status(status).JSON(Response{
+		Success: false,
+		Error:   msg,
+	})
+}
+
 func SuccessWithDuplicate(c *fiber.Ctx, message string) error {
 	return c.JSON(Response{
 		Success: true,

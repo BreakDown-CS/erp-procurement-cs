@@ -31,11 +31,17 @@ func (s *service) CreateSupplier(ctx context.Context, supplier dto.CreateSupplie
 
 	err := s.helper.WithTx(ctx, func(tx pgx.Tx) error {
 
-		modelIsSuppliers := model.Suppliers{
+		modelSuppliers := model.Suppliers{
 			SupplierCode: supplier.SupplierCode,
+			SupplierName: supplier.SupplierName,
+			TaxID:        supplier.TaxID,
+			Email:        supplier.Email,
+			Phone:        supplier.Phone,
+			Address:      supplier.Address,
+			CreatedBy:    supplier.StaffID,
 		}
 
-		isSupplier, err := s.repo.ChackDuplicateSupplier(ctx, tx, modelIsSuppliers)
+		isSupplier, err := s.repo.ChackDuplicateSupplier(ctx, tx, modelSuppliers)
 		if err != nil {
 			return err
 		}
@@ -44,11 +50,19 @@ func (s *service) CreateSupplier(ctx context.Context, supplier dto.CreateSupplie
 			return nil
 		}
 
+		suppliersId, err := s.repo.InsertSupplier(ctx, tx, modelSuppliers)
+		if err != nil {
+			return err
+		}
+
+		response.SupplierID = suppliersId
+
 		return nil
 	})
 
 	if err != nil {
 		return response, err
 	}
+
 	return response, nil
 }
