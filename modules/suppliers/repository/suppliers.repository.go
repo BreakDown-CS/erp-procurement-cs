@@ -72,3 +72,7 @@ func (r *repository) InsertSupplier(ctx context.Context, tx pgx.Tx, supplier mod
 
 	return suppliersId, nil
 }
+
+func (r *repository) GeneratePRNO(ctx context.Context, tx pgx.Tx) (string, error) {
+	return "", nil
+}

@@ -9,6 +9,7 @@ import (
 
 	"github.com/BreakDown-CS/erp-procurement-cs/internal/config"
 	"github.com/BreakDown-CS/erp-procurement-cs/internal/database"
+	"github.com/BreakDown-CS/erp-procurement-cs/modules/purchase_requests"
 	"github.com/BreakDown-CS/erp-procurement-cs/modules/suppliers"
 
 	"github.com/gofiber/fiber/v2"
@@ -43,6 +44,7 @@ func main() {
 
 	// Dependency Injection
 	suppliers.Wire(app, db)
+	purchase_requests.Wire(app, db)
 
 	// Graceful Shutdown implementation
 	go func() {
