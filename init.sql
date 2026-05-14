@@ -14,7 +14,7 @@ CREATE TABLE suppliers (
     created_by UUID,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_by UUID,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 -- purchase_requests
@@ -35,7 +35,7 @@ CREATE TABLE purchase_requests (
     created_by UUID,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_by UUID,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 -- purchase_request_items
@@ -43,7 +43,7 @@ CREATE TABLE purchase_request_details (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     purchase_request_id UUID REFERENCES purchase_requests(id),
 
-    prodcut_name UUID,
+    prodcut_id UUID,
     qty NUMERIC(18,2),
     unit_price NUMERIC(18,2),
 
@@ -52,7 +52,7 @@ CREATE TABLE purchase_request_details (
     created_by UUID,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_by UUID,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE purchase_request_approved (
@@ -66,7 +66,7 @@ CREATE TABLE purchase_request_approved (
     cancel_at TIMESTAMP,
 
     updated_by UUID,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 -- purchase_orders
@@ -89,7 +89,7 @@ CREATE TABLE purchase_orders (
     created_by UUID,
     created_at TIMESTAMP DEFAULT NOW(),
     updated_by UUID,
-    updated_at TIMESTAMP
+    updated_at TIMESTAMP DEFAULT NOW()
 );
 
 -- INDEX
