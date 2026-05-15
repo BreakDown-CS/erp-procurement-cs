@@ -36,7 +36,10 @@ func (s *service) CreatePurchaseRequests(ctx context.Context, pr dto.CreatPurcha
 			return err
 		}
 
-		RequestDateConvert := helper.MustConvertStringToTime(pr.RequestDate)
+		RequestDateConvert, err := helper.ConvertStringToTime(pr.RequestDate)
+		if err != nil {
+			return err
+		}
 
 		modelPurchaseRequests := model.PurchaseRequests{
 			PRNo:           prNoNew,
