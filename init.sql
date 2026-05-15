@@ -64,6 +64,7 @@ CREATE TABLE purchase_request_approved (
 
     cancel_by UUID,
     cancel_at TIMESTAMP,
+    cancel_remark TEXT,
 
     updated_by UUID,
     updated_at TIMESTAMP DEFAULT NOW()

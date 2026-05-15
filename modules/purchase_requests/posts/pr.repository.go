@@ -11,4 +11,6 @@ import (
 type PurchaseRequestRepository interface {
 	GeneratePRNO(ctx context.Context, tx pgx.Tx) (string, error)
 	InsertPurchaseRequest(ctx context.Context, tx pgx.Tx, supplier model.PurchaseRequests) (uuid.UUID, error)
+	InsertPurchaseRequestDetail(ctx context.Context, tx pgx.Tx, supplier model.PurchaseRequestDetails) (uuid.UUID, error)
+	InsertPurchaseRequestApproved(ctx context.Context, tx pgx.Tx, supplier model.PurchaseRequestApproved) (uuid.UUID, error)
 }

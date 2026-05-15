@@ -36,12 +36,13 @@ type PurchaseRequestDetails struct {
 }
 
 type PurchaseRequestApproved struct {
-	ID           uuid.UUID
-	ApprovedBy   uuid.UUID
-	ApprovedAt   time.Time
-	CancelBy     uuid.UUID
-	CancelAt     time.Time
-	CancelRemark string
-	UpdatedBy    uuid.UUID
-	UpdatedAt    time.Time
+	ID                      uuid.UUID
+	PurchaseRequestDetailID uuid.UUID
+	ApprovedBy              uuid.UUID
+	ApprovedAt              time.Time
+	CancelBy                uuid.UUID
+	CancelAt                time.Time
+	CancelRemark            string
+	UpdatedBy               uuid.UUID
+	UpdatedAt               time.Time
 }
