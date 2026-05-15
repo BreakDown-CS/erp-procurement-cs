@@ -31,7 +31,7 @@ func (s *service) CreatePurchaseRequests(ctx context.Context, pr dto.CreatPurcha
 
 	err := s.helper.WithTx(ctx, func(tx pgx.Tx) error {
 
-		prNoNew, err := s.repo.GeneratePRNO(ctx, tx)
+		prNoNew, err := s.repo.GeneratePRNO(ctx, tx, pr.DepartmentId)
 		if err != nil {
 			return err
 		}
@@ -58,9 +58,9 @@ func (s *service) CreatePurchaseRequests(ctx context.Context, pr dto.CreatPurcha
 			modelPurchaseRequestsDetail := model.PurchaseRequestDetails{
 				PurchaseRequestID: prId,
 				ProductId:         prDetail.ProductID,
-				Qty:               float64(prDetail.Qty),
-				UnitPrice:         float64(prDetail.UnitPrice),
-				TotalPrice:        float64(prDetail.UnitPrice * prDetail.Qty),
+				Qty:               prDetail.Qty,
+				UnitPrice:         prDetail.UnitPrice,
+				TotalPrice:        prDetail.UnitPrice * prDetail.Qty,
 				CreatedBy:         pr.StaffId,
 			}
 
@@ -84,7 +84,7 @@ func (s *service) CreatePurchaseRequests(ctx context.Context, pr dto.CreatPurcha
 			response.PRApprovedId = append(response.PRApprovedId, prApprovedId)
 		}
 
-		return nil
+		return err
 	})
 
 	if err != nil {

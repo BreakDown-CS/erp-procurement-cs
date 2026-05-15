@@ -12,6 +12,6 @@ type CreatPurchaseRequest struct {
 
 type CreatePurchaseRequestItem struct {
 	ProductID uuid.UUID `json:"product_id" validate:"required"`
-	Qty       int       `json:"qty" validate:"required"`
-	UnitPrice int       `json:"unit_price" validate:"required"`
+	Qty       float64   `json:"qty" validate:"required"`
+	UnitPrice float64   `json:"unit_price" validate:"required"`
 }

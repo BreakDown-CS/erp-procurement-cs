@@ -6,7 +6,7 @@ import (
 )
 
 func purchaseRequestsRouter(app *fiber.App, handler *handler.Handler) {
-	api := app.Group("/purchase-requests")
+	api := app.Group("/pr")
 
 	api.Post("/savePurchaseRequests", handler.SavePurchaseRequests)
 
