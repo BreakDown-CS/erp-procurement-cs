@@ -1,15 +1,23 @@
 package helper
 
-import "time"
+import (
+	"fmt"
+	"time"
+)
 
-func MustConvertStringToTime(timeString string) time.Time {
+func ConvertStringToTime(timeString string) (time.Time, error) {
 	loc, _ := time.LoadLocation("Asia/Bangkok")
 
-	timeNew, _ := time.ParseInLocation(
+	layouts := []string{
 		"2006-01-02 15:04:05",
-		timeString,
-		loc,
-	)
+		time.RFC3339,
+	}
 
-	return timeNew
+	for _, layout := range layouts {
+		if t, err := time.ParseInLocation(layout, timeString, loc); err == nil {
+			return t, nil
+		}
+	}
+
+	return time.Time{}, fmt.Errorf("invalid time format: %s", timeString)
 }
